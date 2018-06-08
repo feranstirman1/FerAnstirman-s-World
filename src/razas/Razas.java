@@ -7,9 +7,9 @@ package razas;
  */
 public class Razas implements Raza {
     
-    private int dañoRaza=100;
-    private int vidaRaza;
-    private int velocidadConstruccion;
+    private int dañoRaza=50;
+    private int vidaRaza=500;
+    private int velocidadConstruccion=2;
 
     //GETTERS Y SETTERS
     public int getDañoRaza() {

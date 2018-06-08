@@ -1,5 +1,6 @@
 package fergame;
 
+
 public class FerGame {
 
     /**

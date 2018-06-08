@@ -6,6 +6,14 @@ import razas.Razas;
  *
  * @author feranstirman
  */
-public class Dioses {
+public class Dioses extends Razas {
     
+    //CONSTRUCTOR
+    public Dioses(){
+        setVidaRaza(getVidaRaza()*2);
+        setDañoRaza(getDañoRaza()*2);
+        setVelocidadConstruccion(1);
+    }
+
+
 }
