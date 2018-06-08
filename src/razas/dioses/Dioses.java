@@ -14,6 +14,10 @@ public class Dioses extends Razas {
         setDañoRaza(getDañoRaza()*2);
         setVelocidadConstruccion(1);
     }
-
+    
+    //METODOS
+    public void PerderVida(){
+        setVidaRaza(getVidaRaza()- getVidaRaza()/10);
+    }
 
 }

@@ -1,14 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package razas.dioses;
+
+import razas.Razas;
 
 /**
  *
- * @author LVS
+ * @author feranstirman
  */
 public class Zeus extends Dioses{
     
+    //CONSTRUCTOR
+    public Zeus(){  //SE CREA UN DIOS MAS FUERTE PERO CON MENOS VIDA
+        setDañoRaza(getDañoRaza()*2);
+        setVidaRaza(getVidaRaza()/4);
+    }
+    
+    //METODOS ESPECIALES DEL ESPECIALISTA
+    @Override
+    public void AtacarRaza(Razas razaEnemiga){ //ZEUS MUERE INMEDIATAMENTE DESPUES DE ATACAR
+        razaEnemiga.setVidaRaza(razaEnemiga.getVidaRaza()-getDañoRaza());
+        setVidaRaza(0);
+    }
 }

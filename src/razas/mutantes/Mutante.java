@@ -14,4 +14,9 @@ public class Mutante extends Razas {
         setVidaRaza(getVidaRaza()/2);
         setVelocidadConstruccion(2);
     }
+    
+    //METODOS
+    public void RegenerarVida(){
+        setVidaRaza(getVidaRaza()+ getVidaRaza()/10);
+    }
 }
