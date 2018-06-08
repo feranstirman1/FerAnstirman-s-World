@@ -3,8 +3,10 @@ package razas;
 
 /**
  *
- * @author feranstirman1
+ * @author feranstirman
  */
 public interface Raza {
-    void Atacar();
+    void AtacarRaza(Razas razaenemiga);
+    void AtacarEdificio();
+    
 }
