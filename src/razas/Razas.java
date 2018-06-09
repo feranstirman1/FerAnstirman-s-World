@@ -7,9 +7,9 @@ package razas;
  */
 public class Razas implements Raza {
     
-    private int dañoRaza=50;
-    private int vidaRaza=500;
-    private int velocidadConstruccion=2;
+    private int dañoRaza;
+    private int vidaRaza;
+    private int velocidadConstruccion;
 
     //GETTERS Y SETTERS
     public int getDañoRaza() {
@@ -42,6 +42,7 @@ public class Razas implements Raza {
     @Override
     public void AtacarRaza(Razas razaEnemiga){
         razaEnemiga.setVidaRaza(razaEnemiga.getVidaRaza()-dañoRaza);
+        System.out.println("has hecho "+getDañoRaza()+" a la raza enemiga");
     }
     
     @Override

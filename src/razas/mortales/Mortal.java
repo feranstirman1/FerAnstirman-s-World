@@ -10,7 +10,9 @@ public class Mortal extends Razas {
     
     //CONSTRUCTOR
     public Mortal(){
-        setVelocidadConstruccion(3);
+        this.setVidaRaza(1000);
+        this.setDañoRaza(100);
+        this.setVelocidadConstruccion(3);
     }
     
     

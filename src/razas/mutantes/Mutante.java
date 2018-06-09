@@ -10,13 +10,13 @@ public class Mutante extends Razas {
     
     //CONSTRUCTOR
     public Mutante(){
-        setDañoRaza(getDañoRaza()*2);
-        setVidaRaza(getVidaRaza()/2);
-        setVelocidadConstruccion(2);
+        this.setVidaRaza(1000);
+        this.setDañoRaza(150);
+        this.setVelocidadConstruccion(2);
     }
     
     //METODOS
     public void RegenerarVida(){
-        setVidaRaza(getVidaRaza()+ getVidaRaza()/10);
+        this.setVidaRaza(this.getVidaRaza()+this.getVidaRaza()/10);
     }
 }

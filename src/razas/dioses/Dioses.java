@@ -10,14 +10,14 @@ public class Dioses extends Razas {
     
     //CONSTRUCTOR
     public Dioses(){
-        setVidaRaza(getVidaRaza()*2);
-        setDañoRaza(getDañoRaza()*2);
-        setVelocidadConstruccion(1);
+        this.setVidaRaza(500);
+        this.setDañoRaza(200);
+        this.setVelocidadConstruccion(1);
     }
     
     //METODOS
     public void PerderVida(){
-        setVidaRaza(getVidaRaza()- getVidaRaza()/10);
+        this.setVidaRaza(this.getVidaRaza()-this.getVidaRaza()/10);
     }
 
 }
