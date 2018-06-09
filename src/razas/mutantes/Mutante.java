@@ -13,6 +13,7 @@ public class Mutante extends Razas {
         this.setVidaRaza(1000);
         this.setDañoRaza(150);
         this.setVelocidadConstruccion(2);
+        this.setNombre("mutante");
     }
     
     //METODOS

@@ -13,6 +13,7 @@ public class Dioses extends Razas {
         this.setVidaRaza(500);
         this.setDañoRaza(200);
         this.setVelocidadConstruccion(1);
+        this.setNombre("dios");
     }
     
     //METODOS

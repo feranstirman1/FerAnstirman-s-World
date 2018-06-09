@@ -7,4 +7,7 @@ package razas.mortales;
  */
 public class MortalArmy extends Mortal {
     
+    public MortalArmy(){
+        this.setNombre("ejercito de mortales");
+    }
 }

@@ -7,4 +7,7 @@ package razas.mutantes;
  */
 public class MutantArmy extends Mutante {
     
+    public MutantArmy(){
+        this.setNombre("ejercito de mutantes");
+    }
 }

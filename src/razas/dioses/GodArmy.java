@@ -7,4 +7,7 @@ package razas.dioses;
  */
 public class GodArmy extends Dioses{
     
+    public GodArmy(){
+        this.setNombre("ejercito de dioses");
+    }
 }

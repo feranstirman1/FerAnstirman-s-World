@@ -13,6 +13,7 @@ public class Mortal extends Razas {
         this.setVidaRaza(1000);
         this.setDañoRaza(100);
         this.setVelocidadConstruccion(3);
+        this.setNombre("mortal");
     }
     
     

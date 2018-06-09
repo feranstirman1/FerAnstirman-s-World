@@ -10,8 +10,18 @@ public class Razas implements Raza {
     private int dañoRaza;
     private int vidaRaza;
     private int velocidadConstruccion;
+    private String nombre;
 
+    
     //GETTERS Y SETTERS
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public int getDañoRaza() {
         return dañoRaza;
     }
@@ -42,7 +52,7 @@ public class Razas implements Raza {
     @Override
     public void AtacarRaza(Razas razaEnemiga){
         razaEnemiga.setVidaRaza(razaEnemiga.getVidaRaza()-dañoRaza);
-        System.out.println("has hecho "+getDañoRaza()+" a la raza enemiga");
+        System.out.println(nombre+" ha hecho "+dañoRaza+" a "+razaEnemiga.getNombre());
     }
     
     @Override

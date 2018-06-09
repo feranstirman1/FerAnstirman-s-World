@@ -11,12 +11,9 @@ public class Zeus extends Dioses{
     
     //CONSTRUCTOR
     public Zeus(){  //SE CREA UN DIOS MAS FUERTE PERO CON MENOS VIDA
-        
+        this.setDañoRaza(400);
+        this.setVidaRaza(10);
+        this.setNombre("Zeus");
     }
     
-    //METODOS ESPECIALES DEL ESPECIALISTA
-    @Override
-    public void AtacarRaza(Razas razaEnemiga){ //ZEUS MUERE INMEDIATAMENTE DESPUES DE ATACAR
-        
-    }
 }
