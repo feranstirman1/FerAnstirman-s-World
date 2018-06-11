@@ -24,4 +24,9 @@ public class Menu {
         System.out.println("1.Crear Tropa  2.Crear Edificio  3.Atacar Edificio  4.Atacar Tropa  5.Terminar Turno");
     }
     
+    public void MenuRazas(){
+        System.out.println("A que raza desea representar?:");
+        System.out.println("1.Mortales  2.Mutantes  3.Dioses");
+    }
+    
 }

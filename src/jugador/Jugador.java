@@ -20,8 +20,19 @@ public class Jugador {
     private CentroMando centromando;
     private ArrayList<Razas> tropas;
     private ArrayList<Edificio> edificios;
-    private boolean turnoOver;
     private Menu menu = Menu.getMenu();
+
+    
+    public Jugador(){
+        
+        Inicializar();
+        EscogerNombre();
+        EscogerRaza();
+        
+        
+    }
+
+
 
     //GETTER Y SETTER
     public Scanner getInput() {
@@ -74,9 +85,17 @@ public class Jugador {
     
     
     //METODOS
+    
+    public void Inicializar(){
+        centromando= new CentroMando();
+        tropas= new ArrayList<Razas>();
+        edificios= new ArrayList<Edificio>();
+    }
+    
+    
     public void CrearTropa(){
         RazaFactory fabrica;
-        Razas nuevaTropa;
+        Razas nuevaTropa= new Razas();
         System.out.println("1.Tropa  2.Especialista");
         int opcion = input.nextInt();
         String tipo;
@@ -103,12 +122,19 @@ public class Jugador {
             case "mortal":
                 fabrica=new MortalFactory();
                 nuevaTropa=fabrica.getMortal(tipo);
+                break;
             default:
                 System.out.println("NO SE HA PODIDO CREAR LA NUEVA TROPA");
-                nuevaTropa= null;
+                break;
         }
         
-        tropas.add(nuevaTropa);
+        if(nuevaTropa!=null){
+            tropas.add(nuevaTropa);
+            System.out.println("Se ha creado ls nueva tropa con exito");
+            System.out.println("----------------------------------------------------------------");
+        }else{
+            System.out.println("No se ha podido crear a la tropa");
+        }
         
     }
     public void CrearEdificio(){
@@ -169,20 +195,24 @@ public class Jugador {
         }
         
         edificios.add(nuevoEdificio);
+        System.out.println("Se ha creado el nuevo edificio con exito");
+        System.out.println("-----------------------------------------------------");
         
     }
     
     public void AtacarEdificio(){
-        
+        System.out.println("WIP");
     }
     
     public void AtacarTropa(){
-        
+        System.out.println("WIP");
     }
     
     public void Jugar(){
+        boolean turnoOver=false;
         int opcion;
         while(!turnoOver){
+            System.out.println("Turno de "+nombre);
             menu.MostrarMenu();
             opcion=input.nextInt();
             switch(opcion){
@@ -200,11 +230,42 @@ public class Jugador {
                     break;
                 case 5:
                     turnoOver=true;
+                    System.out.println("ha terminado su turno");
+                    break;
                 default:
                     System.out.println("no eligio una opcion valida");
                     break;
             }
         }
+    }
+    
+    public void EscogerRaza(){
+        menu.MenuRazas();
+        int opcion;
+        opcion=input.nextInt();
+        switch(opcion){
+            case 1:
+                raza="mortal";
+                break;
+            case 2:
+                raza="mutante";
+                break;
+            case 3:
+                raza="dios";
+                break;
+            default:
+                System.out.println("No escogio una opcion valida");
+                break;
+                
+        }
+        System.out.println("Su raza ha sido elegida. Representa a: "+raza);
+        System.out.println("-----------------------------------------------------------------------------");
+    }
+    
+    public void EscogerNombre(){
+        System.out.println("Ingrese su user: ");
+        nombre=input.nextLine();
+        System.out.println("Bienvenido, "+nombre);
     }
     
 }

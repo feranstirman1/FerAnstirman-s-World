@@ -9,16 +9,23 @@ import materiales.*;
 public class CentroMando extends Edificio{
     
     public CentroMando(){ //LOS MATERIALES CON LOS QUE COMIENZA CADA JUGADOR
+        
+        cobre= new Cobre();
+        oro=new Oro();
+        elixir= new Elixir();
+        
         this.setVida(10000);
         cobre.setCantidad(1000);
         oro.setCantidad(500);
         elixir.setCantidad(0);
+        destruido=false;
     }
     
     private int nivel=0;
     private int capacidadCobre=10000;
     private int capacidadOro=5000;
     private int capacidadElixir=3000;
+    private boolean destruido;
 
     //GETTER Y SETTER
     public int getNivel() {

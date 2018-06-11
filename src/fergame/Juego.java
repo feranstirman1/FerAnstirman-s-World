@@ -8,9 +8,17 @@ import jugador.*;
  */
 public class Juego {
     
-    private boolean gameOver=false;
+    private boolean gameOver;
     private Jugador jugador1;
     private Jugador jugador2;
+    
+    public Juego(){
+        gameOver=false;
+        jugador1= new Jugador();
+        jugador2=new Jugador();
+    }
+    
+    
     
     public void Run(){
         while(!gameOver){ //TODO EL LOOP DEL JUEGO
@@ -30,6 +38,7 @@ public class Juego {
             gameOver=true;
         }else{
             gameOver=false;
+            System.out.println("Se sigue jugando, ha pasado una fase!");
         }
     }
     

@@ -8,6 +8,7 @@ package edificios;
 public class Edificio {
     
     private int vida;
+    private String tipo;
 
     public int getVida() {
         return vida;
