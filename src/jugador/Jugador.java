@@ -20,6 +20,58 @@ public class Jugador {
     private CentroMando centromando;
     private ArrayList<Razas> tropas;
     private ArrayList<Edificio> edificios;
+    private boolean turnoOver;
+    private Menu menu = Menu.getMenu();
+
+    //GETTER Y SETTER
+    public Scanner getInput() {
+        return input;
+    }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public CentroMando getCentromando() {
+        return centromando;
+    }
+
+    public void setCentromando(CentroMando centromando) {
+        this.centromando = centromando;
+    }
+
+    public ArrayList<Razas> getTropas() {
+        return tropas;
+    }
+
+    public void setTropas(ArrayList<Razas> tropas) {
+        this.tropas = tropas;
+    }
+
+    public ArrayList<Edificio> getEdificios() {
+        return edificios;
+    }
+
+    public void setEdificios(ArrayList<Edificio> edificios) {
+        this.edificios = edificios;
+    }
+    
     
     //METODOS
     public void CrearTropa(){
@@ -118,6 +170,41 @@ public class Jugador {
         
         edificios.add(nuevoEdificio);
         
+    }
+    
+    public void AtacarEdificio(){
+        
+    }
+    
+    public void AtacarTropa(){
+        
+    }
+    
+    public void Jugar(){
+        int opcion;
+        while(!turnoOver){
+            menu.MostrarMenu();
+            opcion=input.nextInt();
+            switch(opcion){
+                case 1:
+                    CrearTropa();
+                    break;
+                case 2:
+                    CrearEdificio();
+                    break;
+                case 3:
+                    AtacarEdificio();
+                    break;
+                case 4:
+                    AtacarTropa();
+                    break;
+                case 5:
+                    turnoOver=true;
+                default:
+                    System.out.println("no eligio una opcion valida");
+                    break;
+            }
+        }
     }
     
 }
