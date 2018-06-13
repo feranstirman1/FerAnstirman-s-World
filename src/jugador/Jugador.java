@@ -239,6 +239,21 @@ public class Jugador {
         }
         
         edificios.add(nuevoEdificio);
+        
+        switch(raza){
+            case "mortal":
+                nuevoEdificio.setFasesContruir(1);
+                break;
+            case "mutante":
+                nuevoEdificio.setFasesContruir(2);
+                break;
+            case "dios":
+                nuevoEdificio.setFasesContruir(3);
+                break;
+            default:
+                return;
+        }
+        
         System.out.println("Se ha creado el nuevo edificio con exito");
         System.out.println("-----------------------------------------------------");
         
@@ -303,6 +318,13 @@ public class Jugador {
                 tipo="edificio de vehiculos";
                 break;
             case 4:
+                
+                if(!edificios.isEmpty()){
+                    System.out.println("Aun no se puede atacar porque quedan otros edificios");
+                    System.out.println("-------------------------------------------------------");
+                    return;
+                }
+                
                 tipo="centromando";
                 break;
             default:
@@ -313,9 +335,9 @@ public class Jugador {
         }
        
         for(Edificio e:jugadorEnemigo.getEdificios()){
-            if(e.getTipo().equals(tipo)){
+            if(e.getTipo().equals(tipo) && e.isConstruido() && e.isVivo()){
                 for(Razas r:tropas){
-                    if(r.isDisponible()&& r.isEntrenada()){
+                    if(r.isDisponible()&& r.isEntrenada() && r.EstaVivo()){
                         r.setEdificioEnemigo(e);
                         r.AtacarEdificio();
                         return;
@@ -335,7 +357,7 @@ public class Jugador {
         for(Razas r:jugadorEnemigo.getTropas()){
             if(!r.isDisponible()){
                 for(Razas e:tropas){
-                    if(e.isDisponible() && e.isEntrenada()){
+                    if(e.isDisponible() && e.isEntrenada()&& e.EstaVivo()){
                         e.setRazaEnemiga(r);
                         e.AtacarRaza();
                         return;
@@ -352,6 +374,7 @@ public class Jugador {
         int opcion;
         while(!turnoOver){
             System.out.println("Turno de "+nombre);
+            System.out.println("Cobre:"+centromando.getCobre().getCantidad()+" Oro:"+centromando.getOro().getCantidad()+" Elxir:"+centromando.getElixir().getCantidad());
             menu.MostrarMenu();
             opcion=input.nextInt();
             switch(opcion){
@@ -370,6 +393,7 @@ public class Jugador {
                 case 5:
                     turnoOver=true;
                     System.out.println("ha terminado su turno");
+                    System.out.println("-----------------------------------------------------");
                     break;
                 default:
                     System.out.println("no eligio una opcion valida");
@@ -405,6 +429,25 @@ public class Jugador {
         System.out.println("Ingrese su user: ");
         nombre=input.nextLine();
         System.out.println("Bienvenido, "+nombre);
+    }
+    
+    public void ActualizarObjetos(){
+        
+        for(Razas r:tropas){
+            r.ActualizarFases();
+            if(r.getVidaRaza()<=0){
+                r.setEstaVivo(false);
+            }
+        }
+        
+        for(Edificio e:edificios){
+            e.ActualizarFases();
+            if(e.getVida()<=0){
+                e.setVivo(false);
+            }
+            
+        }
+        
     }
     
 }

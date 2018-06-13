@@ -15,14 +15,47 @@ public class Razas implements Raza {
     
     private boolean entrenada;
     private boolean disponible;
+    private boolean estaVivo=true;
     
     
     private Razas razaEnemiga;         //ATRIBUTOS PARA ATACAR AL ENEMIGO
     private Edificio edificioEnemigo;
     
+    
+    private int fasesNecesariasEntrenada=2;
+    private int fasesNecesariasAtacar=4;
+    
 
         //GETTERS Y SETTERS
 
+    public boolean EstaVivo() {
+        return estaVivo;
+    }
+
+    public void setEstaVivo(boolean estaVivo) {
+        this.estaVivo = estaVivo;
+    }
+
+    
+    public int getFasesNecesariasEntrenada() {
+        return fasesNecesariasEntrenada;
+    }
+
+    public void setFasesNecesariasEntrenada(int fasesNecesariasEntrenada) {
+        this.fasesNecesariasEntrenada = fasesNecesariasEntrenada;
+    }
+
+    public int getFasesNecesariasAtacar() {
+        return fasesNecesariasAtacar;
+    }
+
+    public void setFasesNecesariasAtacar(int fasesNecesariasAtacar) {
+        this.fasesNecesariasAtacar = fasesNecesariasAtacar;
+    }
+
+    
+    
+    
     public Razas getRazaEnemiga() {
         return razaEnemiga;
     }
@@ -96,6 +129,12 @@ public class Razas implements Raza {
     //METODOS
     @Override
     public void AtacarRaza(){
+        this.setDisponible(false);
+        if(fasesNecesariasAtacar>0){
+            System.out.println("Debe esperar para poder atacar");
+            return;
+        }
+        
         razaEnemiga.setVidaRaza(razaEnemiga.getVidaRaza()-dañoRaza);
         System.out.println(nombre+" ha hecho "+dañoRaza+" de daño a "+razaEnemiga.getNombre());
         System.out.println("-----------------------------------------------------------------");
@@ -103,10 +142,43 @@ public class Razas implements Raza {
     
     @Override
     public void AtacarEdificio(){
-        this.setDisponible(false);//
+        this.setDisponible(false);
+        
+        if(fasesNecesariasAtacar>0){
+            System.out.println("Debe esperar para poder atacar");
+            return;
+        }
+        
+        if(!edificioEnemigo.isConstruido()){
+            System.out.println("El edificio que quiere atacar aun no ha terminado de construirse");
+            return;
+        }
+        
         edificioEnemigo.setVida(edificioEnemigo.getVida()-dañoRaza);
         System.out.println(nombre+" ha hecho "+dañoRaza+" de daño a edificio "+edificioEnemigo.getTipo());
         System.out.println("-----------------------------------------------------------------------");
+    }
+    
+    public void ActualizarFases(){
+        fasesNecesariasAtacar-=1;
+        fasesNecesariasEntrenada-=1;
+        
+        if(fasesNecesariasEntrenada<=0){
+            entrenada=true;
+            System.out.println("tiene una nueva tropa entrenada y lista para atacar");
+            System.out.println("-----------------------------------------------------");
+        }
+        if(fasesNecesariasAtacar<=0 && entrenada && !disponible){
+            if(razaEnemiga==null && edificioEnemigo!=null){
+                AtacarEdificio();
+            }else if(edificioEnemigo==null && razaEnemiga!=null){
+                AtacarRaza();
+            }else{
+                System.out.println("la tropas han regresado a la base con vida");
+                disponible=true;
+            }
+        }
+        
     }
     
    

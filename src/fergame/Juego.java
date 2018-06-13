@@ -26,6 +26,10 @@ public class Juego {
     
     public void Run(){
         while(!gameOver){ //TODO EL LOOP DEL JUEGO
+            System.out.println("FASE: "+fase);
+            System.out.println("--------------------------------------------------------------------");
+            jugador1.ActualizarObjetos();
+            jugador2.ActualizarObjetos();
             jugador1.Jugar();
             jugador2.Jugar();
             CheckIfGameOver();
