@@ -11,7 +11,9 @@ import razas.Razas;
  */
 public class EdificioEntrenamiento extends Edificio {
     
-    
+    public void EdificioEntrenamiento(){
+        this.setTipo("edificio de entrenamiento");
+    }
     
     
 }

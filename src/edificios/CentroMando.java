@@ -10,6 +10,8 @@ public class CentroMando extends Edificio{
     
     public CentroMando(){ //LOS MATERIALES CON LOS QUE COMIENZA CADA JUGADOR
         
+        this.setTipo("centromando");
+        
         cobre= new Cobre();
         oro=new Oro();
         elixir= new Elixir();

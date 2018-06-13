@@ -21,9 +21,11 @@ public class Jugador {
     private ArrayList<Razas> tropas;
     private ArrayList<Edificio> edificios;
     private Menu menu = Menu.getMenu();
+    
+    private Jugador jugadorEnemigo;
 
     
-    public Jugador(){
+    public Jugador(){ //CONSTRUCTOR
         
         Inicializar();
         EscogerNombre();
@@ -35,6 +37,15 @@ public class Jugador {
 
 
     //GETTER Y SETTER
+
+    public Jugador getJugadorEnemigo() {
+        return jugadorEnemigo;
+    }
+
+    public void setJugadorEnemigo(Jugador jugadorEnemigo) {
+        this.jugadorEnemigo = jugadorEnemigo;
+    }
+    
     public Scanner getInput() {
         return input;
     }
@@ -94,6 +105,15 @@ public class Jugador {
     
     
     public void CrearTropa(){
+        
+        
+        if(!HayMaterialSuficienteTropas()){
+            System.out.println("NO HAY MATERIAL SUFICIENTE PARA CREAR TROPAS");
+            System.out.println("-------------------------------------------------");
+            return;
+        }
+        
+        
         RazaFactory fabrica;
         Razas nuevaTropa= new Razas();
         System.out.println("1.Tropa  2.Especialista");
@@ -110,6 +130,11 @@ public class Jugador {
                 tipo="ejercito"; //SI SE DA UN VALOR ERRONEO AUTOMATICAMENTE CREA UN EJERCITO
                 break;
         }
+        
+        if(!ExisteEdificioEntrenamiento()){
+            return;
+        }
+        
         switch(raza){
             case "dios":
                 fabrica= new GodFactory();
@@ -137,7 +162,26 @@ public class Jugador {
         }
         
     }
+    
+    public boolean ExisteEdificioEntrenamiento(){
+        for(Edificio e:edificios){
+            if(e.getTipo().equals("edificio de entrenamiento")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void CrearEdificio(){
+        
+        if(!HayMaterialSuficienteEdificios()){
+            System.out.println("No hay material suficiente para crear el edificio");
+            System.out.println("----------------------------------------------------------------");
+            return;
+        }
+        
+        
+        
         Edificio nuevoEdificio;
         BuildingFactory fabrica=new BuildingFactory();
         String tipoEdificio;
@@ -200,12 +244,107 @@ public class Jugador {
         
     }
     
-    public void AtacarEdificio(){
-        System.out.println("WIP");
+    public boolean HayMaterialSuficienteEdificios(){
+        int cantCobre=500;
+        int cantOro=250;
+        if(centromando.getCobre().getCantidad()>=cantCobre && centromando.getOro().getCantidad()>=cantOro){
+            centromando.getCobre().setCantidad(centromando.getCobre().getCantidad()-cantCobre);
+            centromando.getOro().setCantidad(centromando.getOro().getCantidad()-cantOro);
+            return true;
+        }
+        else
+            return false;
     }
     
-    public void AtacarTropa(){
-        System.out.println("WIP");
+    public boolean HayMaterialSuficienteTropas(){
+        int cantOro=500;
+        int cantElixir=100;
+        if(centromando.getElixir().getCantidad()>=cantElixir && centromando.getOro().getCantidad()>=cantOro){
+            centromando.getElixir().setCantidad(centromando.getElixir().getCantidad()-cantElixir);
+            centromando.getOro().setCantidad(centromando.getOro().getCantidad()-cantOro);
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    public void AtacarEdificioEnemigo(){
+        
+        String tipo;
+        int opcion;
+        System.out.println("Que tipo de edificio desea atacar?");
+        System.out.println("1.Recolector 2.De Entrenamiento 3.De Vehiculos 4.Centro de Mando");
+        opcion=input.nextInt();
+        switch(opcion){
+            case 1:
+                int chooser;
+                System.out.println("1.De cobre 2.de oro 3.de elixir");
+                chooser=input.nextInt();
+                switch(chooser){
+                    case 1:
+                        tipo="recolector de cobre";
+                        break;
+                    case 2:
+                        tipo="recolector de oro";
+                        break;
+                    case 3:
+                        tipo="generador de elixir";
+                        break;
+                    default:
+                        tipo="";
+                        System.out.println("opcion no validad");
+                        break;
+                }
+                break;
+            case 2:
+                tipo="edificio de entrenamiento";
+                break;
+            case 3:
+                tipo="edificio de vehiculos";
+                break;
+            case 4:
+                tipo="centromando";
+                break;
+            default:
+                tipo="";
+                System.out.println("OPCION INVALIDA");
+                break;
+                
+        }
+       
+        for(Edificio e:jugadorEnemigo.getEdificios()){
+            if(e.getTipo().equals(tipo)){
+                for(Razas r:tropas){
+                    if(r.isDisponible()&& r.isEntrenada()){
+                        r.setEdificioEnemigo(e);
+                        r.AtacarEdificio();
+                        return;
+                    }
+                    
+                }
+            }
+        }
+        System.out.println("No hay edificios disponibles para atacar");
+        System.out.println("--------------------------------------------");
+        
+    }
+    
+    
+    
+    public void AtacarTropaEnemiga(){
+        for(Razas r:jugadorEnemigo.getTropas()){
+            if(!r.isDisponible()){
+                for(Razas e:tropas){
+                    if(e.isDisponible() && e.isEntrenada()){
+                        e.setRazaEnemiga(r);
+                        e.AtacarRaza();
+                        return;
+                    }
+                }
+            }
+        }
+        System.out.println("No hay tropas que lo esten atacando");
+        System.out.println("-------------------------------------------");
     }
     
     public void Jugar(){
@@ -223,10 +362,10 @@ public class Jugador {
                     CrearEdificio();
                     break;
                 case 3:
-                    AtacarEdificio();
+                    AtacarEdificioEnemigo();
                     break;
                 case 4:
-                    AtacarTropa();
+                    AtacarTropaEnemiga();
                     break;
                 case 5:
                     turnoOver=true;

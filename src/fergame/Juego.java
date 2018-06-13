@@ -8,14 +8,18 @@ import jugador.*;
  */
 public class Juego {
     
+    private int fase;
     private boolean gameOver;
     private Jugador jugador1;
     private Jugador jugador2;
     
     public Juego(){
+        fase=0;
         gameOver=false;
         jugador1= new Jugador();
         jugador2=new Jugador();
+        jugador1.setJugadorEnemigo(jugador2);
+        jugador2.setJugadorEnemigo(jugador1);
     }
     
     
@@ -25,6 +29,7 @@ public class Juego {
             jugador1.Jugar();
             jugador2.Jugar();
             CheckIfGameOver();
+            fase=fase+1;
         }
         
     }

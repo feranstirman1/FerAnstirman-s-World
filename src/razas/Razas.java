@@ -1,5 +1,6 @@
 
 package razas;
+import edificios.*;
 
 /**
  *
@@ -11,9 +12,53 @@ public class Razas implements Raza {
     private int vidaRaza;
     private int velocidadConstruccion;
     private String nombre;
+    
+    private boolean entrenada;
+    private boolean disponible;
+    
+    
+    private Razas razaEnemiga;         //ATRIBUTOS PARA ATACAR AL ENEMIGO
+    private Edificio edificioEnemigo;
+    
+
+        //GETTERS Y SETTERS
+
+    public Razas getRazaEnemiga() {
+        return razaEnemiga;
+    }
+
+    public void setRazaEnemiga(Razas razaEnemiga) {
+        this.razaEnemiga = razaEnemiga;
+    }
+
+    public Edificio getEdificioEnemigo() {
+        return edificioEnemigo;
+    }
+
+    public void setEdificioEnemigo(Edificio edificioEnemigo) {
+        this.edificioEnemigo = edificioEnemigo;
+    }
 
     
-    //GETTERS Y SETTERS
+    
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    
+    public boolean isEntrenada() {
+        return entrenada;
+    }
+
+    public void setEntrenada(boolean entrenada) {
+        this.entrenada = entrenada;
+    }
+    
+    
     public String getNombre() {
         return nombre;
     }
@@ -50,13 +95,19 @@ public class Razas implements Raza {
 
     //METODOS
     @Override
-    public void AtacarRaza(Razas razaEnemiga){
+    public void AtacarRaza(){
         razaEnemiga.setVidaRaza(razaEnemiga.getVidaRaza()-dañoRaza);
-        System.out.println(nombre+" ha hecho "+dañoRaza+" a "+razaEnemiga.getNombre());
+        System.out.println(nombre+" ha hecho "+dañoRaza+" de daño a "+razaEnemiga.getNombre());
+        System.out.println("-----------------------------------------------------------------");
     }
     
     @Override
     public void AtacarEdificio(){
-        System.out.println("WIP");
+        this.setDisponible(false);//
+        edificioEnemigo.setVida(edificioEnemigo.getVida()-dañoRaza);
+        System.out.println(nombre+" ha hecho "+dañoRaza+" de daño a edificio "+edificioEnemigo.getTipo());
+        System.out.println("-----------------------------------------------------------------------");
     }
+    
+   
 }
