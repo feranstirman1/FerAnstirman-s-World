@@ -139,6 +139,11 @@ public class Razas implements Raza {
         razaEnemiga.setVidaRaza(razaEnemiga.getVidaRaza()-dañoRaza);
         System.out.println(nombre+" ha hecho "+dañoRaza+" de daño a "+razaEnemiga.getNombre());
         System.out.println("-----------------------------------------------------------------");
+        
+        if(razaEnemiga.getVidaRaza()<=0){
+            razaEnemiga=null;
+        }
+        
     }
     
     @Override
@@ -158,6 +163,11 @@ public class Razas implements Raza {
         edificioEnemigo.setVida(edificioEnemigo.getVida()-dañoRaza);
         System.out.println(nombre+" ha hecho "+dañoRaza+" de daño a edificio "+edificioEnemigo.getTipo());
         System.out.println("-----------------------------------------------------------------------");
+        
+        if(edificioEnemigo.getVida()<=0){
+            edificioEnemigo=null;
+        }
+        
     }
     
     public void ActualizarFases(){
