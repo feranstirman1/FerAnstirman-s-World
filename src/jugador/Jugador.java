@@ -113,6 +113,12 @@ public class Jugador {
             return;
         }
         
+        if(!ExisteEdificioEntrenamiento()){
+            System.out.println("No existe ningun edificio de entrenamiento para que la tropa que quiere crear pueda entrenarse");
+            System.out.println("Intente crear un edificio de entrenamiento primero");
+            System.out.println("----------------------------------------------------------------------");
+            return;
+        }
         
         RazaFactory fabrica;
         Razas nuevaTropa= new Razas();
@@ -129,10 +135,6 @@ public class Jugador {
             default:
                 tipo="ejercito"; //SI SE DA UN VALOR ERRONEO AUTOMATICAMENTE CREA UN EJERCITO
                 break;
-        }
-        
-        if(!ExisteEdificioEntrenamiento()){
-            return;
         }
         
         switch(raza){
@@ -285,6 +287,7 @@ public class Jugador {
     
     public void AtacarEdificioEnemigo(){
         
+        boolean encontroEdificio=false;
         String tipo;
         int opcion;
         System.out.println("Que tipo de edificio desea atacar?");
@@ -319,9 +322,16 @@ public class Jugador {
                 break;
             case 4:
                 
-                if(!edificios.isEmpty()){
-                    System.out.println("Aun no se puede atacar porque quedan otros edificios");
-                    System.out.println("-------------------------------------------------------");
+                int vivos=0;
+                for(Edificio e:jugadorEnemigo.getEdificios()){
+                    if(e.isVivo()){
+                        vivos+=1;
+                    }
+                }
+                
+                if(vivos>1){
+                    System.out.println("Aun no se puede atacar el centro de mando enemigo porque quedan otros edificios vivos");
+                    System.out.println("--------------------------------------------------------------------------------------");
                     return;
                 }
                 
@@ -335,9 +345,14 @@ public class Jugador {
         }
        
         for(Edificio e:jugadorEnemigo.getEdificios()){
+            System.out.println("Edificio enemigo tipo: "+e.getTipo());
+            System.out.println(e.isConstruido());
+            System.out.println(e.isVivo());
             if(e.getTipo().equals(tipo) && e.isConstruido() && e.isVivo()){
                 for(Razas r:tropas){
                     if(r.isDisponible()&& r.isEntrenada() && r.EstaVivo()){
+                        encontroEdificio=true;
+                        System.out.println("Encontro un edificio al cual atacar!");
                         r.setEdificioEnemigo(e);
                         r.AtacarEdificio();
                         return;
@@ -346,8 +361,11 @@ public class Jugador {
                 }
             }
         }
-        System.out.println("No hay edificios disponibles para atacar");
+        
+        if(!encontroEdificio){
+        System.out.println("No hay edificios disponibles para atacar con esa descripcion o sus tropas no estan entrenadas");
         System.out.println("--------------------------------------------");
+        }
         
     }
     
@@ -391,6 +409,9 @@ public class Jugador {
                     AtacarTropaEnemiga();
                     break;
                 case 5:
+                    MostrarEdificiosEnemigos();
+                    break;
+                case 6:
                     turnoOver=true;
                     System.out.println("ha terminado su turno");
                     System.out.println("-----------------------------------------------------");
@@ -449,19 +470,29 @@ public class Jugador {
             
             if(e.getTipo().equals("recolector de cobre") && e.isConstruido() && e.isVivo()){
                 centromando.getCobre().setCantidad(centromando.getCobre().getCantidad()+50);
-                System.out.println("se ha recolectado 50 de cobre");
+                System.out.println("se ha recolectado 50 de cobre para "+this.nombre);
+                System.out.println("--------------------------------------------------------------");
             }
             if(e.getTipo().equals("recolector de oro") && e.isConstruido() && e.isVivo()){
                 centromando.getOro().setCantidad(centromando.getOro().getCantidad()+100);
-                System.out.println("Se ha recolectado 100 de oro");
+                System.out.println("Se ha recolectado 100 de oro para "+this.nombre);
+                System.out.println("------------------------------------------------------------------");
             }
             if(e.getTipo().equals("generador de elixir") && e.isConstruido() && e.isVivo()){
                 centromando.getElixir().setCantidad(centromando.getElixir().getCantidad()+100);
-                System.out.println("Se ha generado 100 de elixir");
+                System.out.println("Se ha generado 100 de elixir para "+this.nombre);
+                System.out.println("---------------------------------------------------------------------");
             }
             
         }
         
+    }
+    
+    public void MostrarEdificiosEnemigos(){
+        int contador=1;
+        for(Edificio e:jugadorEnemigo.getEdificios()){
+            System.out.println(contador+"."+"Tipo: "+e.getTipo());
+        }
     }
     
 }

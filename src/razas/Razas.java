@@ -130,6 +130,7 @@ public class Razas implements Raza {
     @Override
     public void AtacarRaza(){
         this.setDisponible(false);
+        
         if(fasesNecesariasAtacar>0){
             System.out.println("Debe esperar para poder atacar");
             return;
@@ -160,8 +161,12 @@ public class Razas implements Raza {
     }
     
     public void ActualizarFases(){
-        fasesNecesariasAtacar-=1;
+        
         fasesNecesariasEntrenada-=1;
+        
+        if(!disponible){
+            fasesNecesariasAtacar-=1;
+        }
         
         if(fasesNecesariasEntrenada<=0){
             entrenada=true;
