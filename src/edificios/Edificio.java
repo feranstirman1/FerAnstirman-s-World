@@ -10,7 +10,7 @@ public class Edificio {
     private int vida;
     private String tipo;
     private boolean construido=false;
-    private boolean vivo;
+    private boolean vivo=true;
     private int fasesContruir;
 
     public boolean isVivo() {
@@ -55,20 +55,14 @@ public class Edificio {
         this.vida = vida;
     }
     
-    public void ActualizarFases(){
+    public void ActualizarFases(String nombre){
         fasesContruir-=1;
-        if(fasesContruir<=0){
+        if(fasesContruir<=0 && !construido){
             construido=true;
-            vivo=true;
+            System.out.println("El edificio que "+nombre+ " creo ya esta construido y listo para funcionar!!!");
+            System.out.println("-------------------------------------------------------------------");
         }
     }
     
-    public boolean EstaMuerto(){
-        if(vida<=0){
-            return true;
-        }else{
-            return false;
-        }
-    }
     
 }

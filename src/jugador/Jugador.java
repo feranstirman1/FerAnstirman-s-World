@@ -441,9 +441,23 @@ public class Jugador {
         }
         
         for(Edificio e:edificios){
-            e.ActualizarFases();
+            e.ActualizarFases(this.getNombre());
             if(e.getVida()<=0){
                 e.setVivo(false);
+            }
+            
+            
+            if(e.getTipo().equals("recolector de cobre") && e.isConstruido() && e.isVivo()){
+                centromando.getCobre().setCantidad(centromando.getCobre().getCantidad()+50);
+                System.out.println("se ha recolectado 50 de cobre");
+            }
+            if(e.getTipo().equals("recolector de oro") && e.isConstruido() && e.isVivo()){
+                centromando.getOro().setCantidad(centromando.getOro().getCantidad()+100);
+                System.out.println("Se ha recolectado 100 de oro");
+            }
+            if(e.getTipo().equals("generador de elixir") && e.isConstruido() && e.isVivo()){
+                centromando.getElixir().setCantidad(centromando.getElixir().getCantidad()+100);
+                System.out.println("Se ha generado 100 de elixir");
             }
             
         }

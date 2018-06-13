@@ -25,6 +25,7 @@ public class Juego {
     
     
     public void Run(){
+        System.out.println("WELCOME TO FERANSTIRMAN´S WORLD!!!");
         while(!gameOver){ //TODO EL LOOP DEL JUEGO
             System.out.println("FASE: "+fase);
             System.out.println("--------------------------------------------------------------------");
