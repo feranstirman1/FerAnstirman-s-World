@@ -40,11 +40,11 @@ public class Juego {
     }
     
     public void CheckIfGameOver(){
-        if(jugador1.getCentromando().getVida()==0){
-            System.out.println("jugador 2 es el ganador!");
+        if(jugador1.getCentromando().getVida()<=0){
+            System.out.println(jugador2.getNombre()+" es el ganador!");
             gameOver=true;
-        }else if(jugador2.getCentromando().getVida()==0){
-            System.out.println("Jugador 1 ha ganado!!");
+        }else if(jugador2.getCentromando().getVida()<=0){
+            System.out.println(jugador1.getNombre()+" ha ganado!!");
             gameOver=true;
         }else{
             gameOver=false;

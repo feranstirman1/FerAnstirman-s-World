@@ -323,7 +323,14 @@ public class Jugador {
                 break;
             case 4:
                 
+                if(jugadorEnemigo.getEdificios().isEmpty()){
+                    tipo="centromando";
+                    break;
+                }
+                else{
+                
                 int vivos=0;
+                
                 for(Edificio e:jugadorEnemigo.getEdificios()){
                     if(e.isVivo()){
                         vivos+=1;
@@ -338,11 +345,24 @@ public class Jugador {
                 
                 tipo="centromando";
                 break;
+                }
             default:
                 tipo="";
                 System.out.println("OPCION INVALIDA");
                 break;
                 
+        }
+        
+        if(tipo.equals("centromando")){
+            for(Razas r:tropas){
+                if(r.isDisponible() && r.EstaVivo() && r.isEntrenada()){
+                    System.out.println("El ataque al centro de mando ha comenzado");
+                    r.setEdificioEnemigo(jugadorEnemigo.getCentromando());
+                    r.setFasesNecesariasAtacar(HayCarro());
+                    r.AtacarEdificio();
+                    return;
+                }
+            }
         }
        
         for(Edificio e:jugadorEnemigo.getEdificios()){
@@ -355,6 +375,7 @@ public class Jugador {
                         encontroEdificio=true;
                         System.out.println("Encontro un edificio al cual atacar!");
                         r.setEdificioEnemigo(e);
+                        r.setFasesNecesariasAtacar(HayCarro());
                         r.AtacarEdificio();
                         if(r.getNombre().equals("Zeus")){ //EL ESPECIALISTA DE LOS DIOSES ATACA UNA VEZ Y MUERE 
                             r.setEstaVivo(false);
@@ -381,6 +402,7 @@ public class Jugador {
                 for(Razas e:tropas){
                     if(e.isDisponible() && e.isEntrenada()&& e.EstaVivo()){
                         e.setRazaEnemiga(r);
+                        e.setFasesNecesariasAtacar(HayCarro());
                         e.AtacarRaza();
                         return;
                     }
@@ -529,6 +551,7 @@ public class Jugador {
     public void MostrarEdificios(){
         System.out.println("--------------------------------------------------------");
         System.out.println("******************* MIS EDIFICIOS ************************");
+        System.out.println("Tipo: centro de mando"+"  Vida: "+centromando.getVida());
         for(Edificio e:edificios){
             if(e.isVivo() && e.isConstruido()){
                 System.out.println("Tipo: "+e.getTipo()+" Vida: "+e.getVida());
@@ -548,4 +571,16 @@ public class Jugador {
         System.out.println("----------------------------------------------------------");
     }
     
+    public int HayCarro(){
+        for(Edificio e:edificios){
+            if(e.getTipo().equals("edificio de elefantes")){
+                e.setVivo(false);
+                return 3;
+            }else if(e.getTipo().equals("edificio de panteras")){
+                e.setVivo(false);
+                return 1;
+            }
+        }
+        return 4;
+    }
 }

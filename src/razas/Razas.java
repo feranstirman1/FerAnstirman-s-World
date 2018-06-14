@@ -153,6 +153,7 @@ public class Razas implements Raza {
         
         if(fasesNecesariasAtacar>0){
             System.out.println("Debe esperar para poder atacar");
+            System.out.println("-------------------------------------------------------------");
             return;
         }
         

@@ -9,8 +9,19 @@ public class Vehiculo {
     
     private int velocidad;
     private String nombre;
+    private boolean disponible;
 
     //GETTERS Y SETTERS
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+    
+    
     public int getVelocidad() {
         return velocidad;
     }
