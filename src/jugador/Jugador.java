@@ -418,6 +418,8 @@ public class Jugador {
                     centromando.LevelUp();
                     break;
                 case 7:
+                    menu.MostrarCostos();
+                case 8:
                     turnoOver=true;
                     System.out.println("ha terminado su turno");
                     System.out.println("-----------------------------------------------------");
