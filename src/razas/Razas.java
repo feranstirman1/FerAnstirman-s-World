@@ -14,7 +14,7 @@ public class Razas implements Raza {
     private String nombre;
     
     private boolean entrenada;
-    private boolean disponible;
+    private boolean disponible=true;
     private boolean estaVivo=true;
     
     
@@ -170,7 +170,7 @@ public class Razas implements Raza {
         
     }
     
-    public void ActualizarFases(){
+    public void ActualizarFases(String nombre){
         
         fasesNecesariasEntrenada-=1;
         
@@ -178,9 +178,9 @@ public class Razas implements Raza {
             fasesNecesariasAtacar-=1;
         }
         
-        if(fasesNecesariasEntrenada<=0){
+        if(fasesNecesariasEntrenada==0){
             entrenada=true;
-            System.out.println("tiene una nueva tropa entrenada y lista para atacar");
+            System.out.println(nombre+" tiene una nueva tropa entrenada y lista para atacar");
             System.out.println("-----------------------------------------------------");
         }
         if(fasesNecesariasAtacar<=0 && entrenada && !disponible){
@@ -189,7 +189,7 @@ public class Razas implements Raza {
             }else if(edificioEnemigo==null && razaEnemiga!=null){
                 AtacarRaza();
             }else{
-                System.out.println("la tropas han regresado a la base con vida");
+                System.out.println("la tropas de "+nombre+" han regresado a la base con vida");
                 disponible=true;
             }
         }

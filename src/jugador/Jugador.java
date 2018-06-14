@@ -345,9 +345,9 @@ public class Jugador {
         }
        
         for(Edificio e:jugadorEnemigo.getEdificios()){
-            System.out.println("Edificio enemigo tipo: "+e.getTipo());
-            System.out.println(e.isConstruido());
-            System.out.println(e.isVivo());
+            //System.out.println("Edificio enemigo tipo: "+e.getTipo());
+            //System.out.println(e.isConstruido());
+            //System.out.println(e.isVivo());
             if(e.getTipo().equals(tipo) && e.isConstruido() && e.isVivo()){
                 for(Razas r:tropas){
                     if(r.isDisponible()&& r.isEntrenada() && r.EstaVivo()){
@@ -355,6 +355,9 @@ public class Jugador {
                         System.out.println("Encontro un edificio al cual atacar!");
                         r.setEdificioEnemigo(e);
                         r.AtacarEdificio();
+                        if(r.getNombre().equals("Zeus")){ //EL ESPECIALISTA DE LOS DIOSES ATACA UNA VEZ Y MUERE 
+                            r.setEstaVivo(false);
+                        }
                         return;
                     }
                     
@@ -412,6 +415,9 @@ public class Jugador {
                     MostrarEdificiosEnemigos();
                     break;
                 case 6:
+                    centromando.LevelUp();
+                    break;
+                case 7:
                     turnoOver=true;
                     System.out.println("ha terminado su turno");
                     System.out.println("-----------------------------------------------------");
@@ -424,9 +430,14 @@ public class Jugador {
     }
     
     public void EscogerRaza(){
+        
         menu.MenuRazas();
         int opcion;
         opcion=input.nextInt();
+        while(opcion<1 || opcion>3){
+            System.out.println("Escoja una raza valida porfavor");
+            opcion=input.nextInt();
+        }
         switch(opcion){
             case 1:
                 raza="mortal";
@@ -455,7 +466,7 @@ public class Jugador {
     public void ActualizarObjetos(){
         
         for(Razas r:tropas){
-            r.ActualizarFases();
+            r.ActualizarFases(this.getNombre());
             if(r.getVidaRaza()<=0){
                 r.setEstaVivo(false);
             }
@@ -468,17 +479,17 @@ public class Jugador {
             }
             
             
-            if(e.getTipo().equals("recolector de cobre") && e.isConstruido() && e.isVivo()){
-                centromando.getCobre().setCantidad(centromando.getCobre().getCantidad()+50);
+            if(e.getTipo().equals("recolector de cobre") && e.isConstruido() && e.isVivo()){ //RECOLECTA COBRE
+                centromando.getCobre().setCantidad(centromando.getCobre().getCantidad()+500);
                 System.out.println("se ha recolectado 50 de cobre para "+this.nombre);
                 System.out.println("--------------------------------------------------------------");
             }
-            if(e.getTipo().equals("recolector de oro") && e.isConstruido() && e.isVivo()){
+            if(e.getTipo().equals("recolector de oro") && e.isConstruido() && e.isVivo()){ //RECOLECTA ORO
                 centromando.getOro().setCantidad(centromando.getOro().getCantidad()+100);
                 System.out.println("Se ha recolectado 100 de oro para "+this.nombre);
                 System.out.println("------------------------------------------------------------------");
             }
-            if(e.getTipo().equals("generador de elixir") && e.isConstruido() && e.isVivo()){
+            if(e.getTipo().equals("generador de elixir") && e.isConstruido() && e.isVivo()){  //RECOLECTA ELIXIR
                 centromando.getElixir().setCantidad(centromando.getElixir().getCantidad()+100);
                 System.out.println("Se ha generado 100 de elixir para "+this.nombre);
                 System.out.println("---------------------------------------------------------------------");
@@ -486,13 +497,19 @@ public class Jugador {
             
         }
         
+        centromando.ActualizarCentro();
+        
     }
     
     public void MostrarEdificiosEnemigos(){
+        System.out.println("-------------------------------------------");
+        System.out.println("Edificios Enemigos:");
         int contador=1;
         for(Edificio e:jugadorEnemigo.getEdificios()){
             System.out.println(contador+"."+"Tipo: "+e.getTipo());
+            contador+=1;
         }
+        System.out.println("--------------------------------------------------------------");
     }
     
 }

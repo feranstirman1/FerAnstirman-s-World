@@ -7,10 +7,10 @@ package edificios;
  */
 public class EdificioCobre extends Edificio {
     
-    int cobreGenerado=50;
+    int cobreGenerado=500;
     
     public EdificioCobre(){
-        this.setVida(200);
+        this.setVida(600);
         this.setTipo("recolector de cobre");
     }
     

@@ -21,7 +21,8 @@ public class Menu {
     }
     
     public void MostrarMenu(){
-        System.out.println("1.Crear Tropa  2.Crear Edificio  3.Atacar Edificio  4.Defender Edificio 5.Mostrar Edificios Enemigos  6.Terminar Turno");
+        System.out.println("1.Crear Tropa  2.Crear Edificio  3.Atacar Edificio "
+                + " 4.Defender Edificio 5.Mostrar Edificios Enemigos 6.Levelear Centro de Mando  7.Terminar Turno");
     }
     
     public void MenuRazas(){

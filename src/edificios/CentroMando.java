@@ -125,4 +125,17 @@ public class CentroMando extends Edificio{
             System.out.println("NO TIENE LOS MATERIALES NECESARIOS PARA SUBIR DE NIVEL");
         }
     }
+    
+    public void ActualizarCentro(){
+        if(oro.getCantidad()>capacidadOro){
+            oro.setCantidad(capacidadOro);
+        }
+        if(cobre.getCantidad()>capacidadCobre){
+            cobre.setCantidad(capacidadCobre);
+        }
+        if(elixir.getCantidad()>capacidadElixir){
+            elixir.setCantidad(capacidadElixir);
+        }
+    }
+    
 }
