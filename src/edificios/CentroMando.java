@@ -18,7 +18,7 @@ public class CentroMando extends Edificio{
         
         this.setVida(10000);
         this.setConstruido(true);
-        cobre.setCantidad(1000);
+        cobre.setCantidad(900);
         oro.setCantidad(500);
         elixir.setCantidad(0);
         destruido=false;

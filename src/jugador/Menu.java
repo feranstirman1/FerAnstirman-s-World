@@ -22,7 +22,7 @@ public class Menu {
     
     public void MostrarMenu(){
         System.out.println("1.Crear Tropa  2.Crear Edificio  3.Atacar Edificio "
-                + " 4.Defender Edificio 5.Mostrar Edificios Enemigos 6.Levelear Centro de Mando 7.Mostrar Costos  8.Terminar Turno");
+                + " 4.Defender 5.Edificios Enemigos 6.Levelear Centro de Mando 7.Mostrar Costos 8.Mis Edificios 9.Mis Tropas 10.Terminar Turno");
     }
     
     public void MenuRazas(){
@@ -31,8 +31,11 @@ public class Menu {
     }
     
     public void MostrarCostos(){
-        System.out.println("Milicia  Cobre:500  Oro:250  Elixir:0  ");
-        System.out.println("Edificio  Cobre:0  Oro:500  Elixir:100  ");
+        System.out.println("---------------------------------------------------");
+        System.out.println("*************COSTOS**********************************");
+        System.out.println("Edificio  Cobre:500  Oro:250  Elixir:0  ");
+        System.out.println("Guerrero  Cobre:0  Oro:500  Elixir:100  ");
+        System.out.println("-----------------------------------------------------");
     }
     
 }
