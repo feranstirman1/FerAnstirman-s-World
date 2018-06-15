@@ -16,6 +16,8 @@ public class Juego {
     public Juego(){
         fase=0;
         gameOver=false;
+        System.out.println("GAME START");
+        System.out.println("***********************************************");
         jugador1= new Jugador();
         jugador2=new Jugador();
         jugador1.setJugadorEnemigo(jugador2);
